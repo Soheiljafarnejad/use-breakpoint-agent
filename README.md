@@ -1,7 +1,5 @@
 # use-breakpoint-agent
 
-![use-media-breakpoint](./assets/banner.webp)
-
 A lightweight and reliable React hook for determining the user's device type (`mobile`, `tablet`, or `desktop`) based on screen width.
 
 This package supports **Server-Side Rendering (SSR)** by accepting an initial value during the server pass, which helps prevent **layout shift** and ensures a consistent UI experience from server to client.
@@ -10,10 +8,11 @@ It also updates the device type **synchronously when the window size changes**, 
 
 Perfect for responsive designs, conditional rendering, and stable multi-device support.
 
+
 [![npm version](https://img.shields.io/npm/v/use-breakpoint-agent.svg)](https://www.npmjs.com/package/use-breakpoint-agent)
 [![MIT license](https://img.shields.io/npm/l/use-breakpoint-agent.svg)](LICENSE)
 
----
+![use-media-breakpoint](./assets/banner.webp)
 
 ## ✨ Features
 
@@ -21,8 +20,6 @@ Perfect for responsive designs, conditional rendering, and stable multi-device s
 - 📱 Detects device type from screen width
 - ⚛️ Works with all React versions that support hooks
 - 💡 Lightweight and easy to use
-
----
 
 ## 📦 Installation
 
@@ -33,8 +30,6 @@ yarn add use-breakpoint-agent
 # or
 pnpm add use-breakpoint-agent
 ```
-
----
 
 ## 🚀 Usage
 
@@ -307,8 +302,6 @@ Gets user-agent from headers and returns the device type.
 
 **Note:** If the input is `undefined` or the device type cannot be determined, it will default to `desktop`.
 
----
-
 ## 📐 Breakpoints
 
 | Device  | Width (px)            |
@@ -322,8 +315,6 @@ You can override these defaults by passing a second argument:
 ```tsx
 useBreakpointAgent(serverDevice, { mobile: 600, tablet: 900 });
 ```
-
----
 
 ## 🧩 Types And Enums
 
