@@ -21,6 +21,11 @@ Perfect for responsive designs, conditional rendering, and stable multi-device s
 - ⚛️ Works with Next.js, Vite, CRA, and any React project
 - 💡 Lightweight and easy to use
 
+## 📖 Related Article
+
+Read the full article on Medium:
+Detect Devices Smartly in React SSR – [Introducing use-breakpoint-agent](https://medium.com/@Soheiljafarnejad/detect-devices-smartly-in-react-ssr-introducing-usebreakpointagent-4e007ef7753c)
+
 ## 📦 Installation
 
 ```bash
@@ -44,8 +49,8 @@ import { headers } from "next/headers";
 import { getDeviceTypeFromHeaders } from "use-breakpoint-agent/server";
 import { DeviceEnum } from "use-breakpoint-agent";
 
-export async function getDeviceType(): DeviceEnum {
-  const headerList = headers();
+export async function getDeviceType(): Promise<DeviceEnum> {
+  const headerList = await headers();
   return getDeviceTypeFromHeaders(headerList);
 }
 ```
