@@ -13,6 +13,12 @@ Perfect for responsive designs, conditional rendering, and stable multi-device s
 
 ![use-media-breakpoint](./assets/banner.webp)
 
+
+## 📖 Related Article
+
+Read the full article on Medium:
+Detect Devices Smartly in React SSR – [Introducing use-breakpoint-agent](https://medium.com/@Soheiljafarnejad/detect-devices-smartly-in-react-ssr-introducing-usebreakpointagent-4e007ef7753c)
+
 ## ✨ Features
 
 - ✅ SSR-friendly with initial server value
@@ -20,11 +26,6 @@ Perfect for responsive designs, conditional rendering, and stable multi-device s
 - 🧬 Works with all React versions that support hooks
 - ⚛️ Works with Next.js, Vite, CRA, and any React project
 - 💡 Lightweight and easy to use
-
-## 📖 Related Article
-
-Read the full article on Medium:
-Detect Devices Smartly in React SSR – [Introducing use-breakpoint-agent](https://medium.com/@Soheiljafarnejad/detect-devices-smartly-in-react-ssr-introducing-usebreakpointagent-4e007ef7753c)
 
 ## 📦 Installation
 
