@@ -1,7 +1,7 @@
-import { DeviceType } from "../types";
+import { DeviceEnum } from "../types";
 import { UAParser } from "ua-parser-js";
 
-export function getDeviceTypeFromString(input: string | undefined): DeviceType {
+export function getDeviceTypeFromString(input: string | undefined): DeviceEnum {
   if (typeof window === "undefined") {
     throw new Error("use-breakpoint-agent/client cannot be used on the server side");
   }
@@ -9,7 +9,7 @@ export function getDeviceTypeFromString(input: string | undefined): DeviceType {
   const data = UAParser(input);
   const device = data.device?.type;
 
-  if (device === "mobile") return DeviceType.MOBILE;
-  if (device === "tablet") return DeviceType.TABLET;
-  return DeviceType.DESKTOP;
+  if (device === "mobile") return DeviceEnum.MOBILE;
+  if (device === "tablet") return DeviceEnum.TABLET;
+  return DeviceEnum.DESKTOP;
 }

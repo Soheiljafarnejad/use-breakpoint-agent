@@ -1,8 +1,8 @@
 import { UAParser } from "ua-parser-js";
-import { DeviceType } from "../types";
+import { DeviceEnum } from "../types";
 import type { IncomingHttpHeaders } from "http";
 
-export function getDeviceTypeFromHeaders(headers: Headers | IncomingHttpHeaders): DeviceType {
+export function getDeviceTypeFromHeaders(headers: Headers | IncomingHttpHeaders): DeviceEnum {
   if (typeof window !== "undefined") {
     throw new Error("use-breakpoint-agent/server cannot be used on the client side");
   }
@@ -13,7 +13,7 @@ export function getDeviceTypeFromHeaders(headers: Headers | IncomingHttpHeaders)
   const data = UAParser(agent || undefined);
   const device = data.device?.type;
 
-  if (device === "mobile") return DeviceType.MOBILE;
-  if (device === "tablet") return DeviceType.TABLET;
-  return DeviceType.DESKTOP;
+  if (device === "mobile") return DeviceEnum.MOBILE;
+  if (device === "tablet") return DeviceEnum.TABLET;
+  return DeviceEnum.DESKTOP;
 }

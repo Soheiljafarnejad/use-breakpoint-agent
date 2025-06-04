@@ -8,7 +8,6 @@ It also updates the device type **synchronously when the window size changes**, 
 
 Perfect for responsive designs, conditional rendering, and stable multi-device support.
 
-
 [![npm version](https://img.shields.io/npm/v/use-breakpoint-agent.svg)](https://www.npmjs.com/package/use-breakpoint-agent)
 [![MIT license](https://img.shields.io/npm/l/use-breakpoint-agent.svg)](LICENSE)
 
@@ -42,9 +41,9 @@ pnpm add use-breakpoint-agent
 "use server";
 import { headers } from "next/headers";
 import { getDeviceTypeFromHeaders } from "use-breakpoint-agent/server";
-import { DeviceType } from "use-breakpoint-agent";
+import { DeviceEnum } from "use-breakpoint-agent";
 
-export async function getDeviceType(): DeviceType {
+export async function getDeviceType(): DeviceEnum {
   const headerList = headers();
   return getDeviceTypeFromHeaders(headerList);
 }
@@ -67,9 +66,9 @@ export default async function Page() {
 
 ```tsx
 "use client";
-import { useBreakpointAgent, DeviceType } from "use-breakpoint-agent";
+import { useBreakpointAgent, DeviceEnum } from "use-breakpoint-agent";
 
-export default function MyComponent({ serverDevice }: { serverDevice: DeviceType }) {
+export default function MyComponent({ serverDevice }: { serverDevice: DeviceEnum }) {
   const device = useBreakpointAgent(serverDevice);
   return <div>You are using: {device}</div>;
 }
@@ -82,7 +81,7 @@ export default function MyComponent({ serverDevice }: { serverDevice: DeviceType
 ```tsx
 // pages/index.tsx
 import { getDeviceTypeFromHeaders } from "use-breakpoint-agent/server";
-import { DeviceType } from "use-breakpoint-agent";
+import { DeviceEnum } from "use-breakpoint-agent";
 import MyComponent from "../components/MyComponent";
 
 export async function getServerSideProps({ req }: { req: Request }) {
@@ -90,7 +89,7 @@ export async function getServerSideProps({ req }: { req: Request }) {
   return { props: { serverDevice } };
 }
 
-export default function Home({ serverDevice }: { serverDevice: DeviceType }) {
+export default function Home({ serverDevice }: { serverDevice: DeviceEnum }) {
   return <MyComponent serverDevice={serverDevice} />;
 }
 ```
@@ -98,9 +97,9 @@ export default function Home({ serverDevice }: { serverDevice: DeviceType }) {
 2. Use the `useBreakpointAgent` hook in your component to get the current device type:
 
 ```tsx
-import { useBreakpointAgent, DeviceType } from "use-breakpoint-agent";
+import { useBreakpointAgent, DeviceEnum } from "use-breakpoint-agent";
 
-export default function MyComponent({ serverDevice }: { serverDevice: DeviceType }) {
+export default function MyComponent({ serverDevice }: { serverDevice: DeviceEnum }) {
   const device = useBreakpointAgent(serverDevice);
   return <div>You are using: {device}</div>;
 }
@@ -218,7 +217,6 @@ app.use("*all", async (req, res) => {
 app.listen(port, () => {
   console.log(`Server started at http://localhost:${port}`);
 });
-
 ```
 
 2. Create a Custom Server-Side Render Function to Inject Device Info:
@@ -228,9 +226,9 @@ app.listen(port, () => {
 import { StrictMode } from "react";
 import { type RenderToPipeableStreamOptions, renderToPipeableStream } from "react-dom/server";
 import App from "./App";
-import { DeviceType } from "use-breakpoint-agent";
+import { DeviceEnum } from "use-breakpoint-agent";
 
-export function render(_url: string, options?: RenderToPipeableStreamOptions & { device?: DeviceType }) {
+export function render(_url: string, options?: RenderToPipeableStreamOptions & { device?: DeviceEnum }) {
   const serverDevice = options?.device!;
   if (options) delete options.device;
 
@@ -267,12 +265,12 @@ hydrateRoot(
 // src/App.tsx
 import "./App.css";
 import { Suspense, lazy } from "react";
-import { DeviceType } from "use-breakpoint-agent";
+import { DeviceEnum } from "use-breakpoint-agent";
 
 // Works also with SSR as expected
 const MyComponent = lazy(() => import("./MyComponent"));
 
-function App({ serverDevice }: { serverDevice: DeviceType }) {
+function App({ serverDevice }: { serverDevice: DeviceEnum }) {
   return (
     <>
       <h1>Vite + React SSR</h1>
@@ -290,9 +288,9 @@ export default App;
 5. Use the `useBreakpointAgent` hook in your component to get the current device type:
 
 ```tsx
-import { DeviceType, useBreakpointAgent } from "use-breakpoint-agent";
+import { DeviceEnum, useBreakpointAgent } from "use-breakpoint-agent";
 
-function MyComponent({ serverDevice }: { serverDevice: DeviceType }) {
+function MyComponent({ serverDevice }: { serverDevice: DeviceEnum }) {
   const device = useBreakpointAgent(serverDevice);
   return <div>You are using: {device}</div>;
 }
@@ -355,16 +353,16 @@ export async function handleRequest(req, res) {
 
 | Param          | Type                                    | Description                                                                                                                                |
 | -------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `serverDevice` | `DeviceType`                            | Used during SSR to guess the device type. If provided, the return type will be `DeviceType`; otherwise, it will be `DeviceType` or `null`. |
+| `serverDevice` | `DeviceEnum`                            | Used during SSR to guess the device type. If provided, the return type will be `DeviceEnum`; otherwise, it will be `DeviceEnum` or `null`. |
 | `breakpoints`  | `{ mobile?: number; tablet?: number; }` | Optional screen breakpoints                                                                                                                |
 
 Returns the current device type (`mobile` | `tablet` | `desktop`).
 
-### `getDeviceTypeFromString(userAgent: string | undefined): DeviceType`
+### `getDeviceTypeFromString(userAgent: string | undefined): DeviceEnum`
 
 Determines device from user-agent string.
 
-### `getDeviceTypeFromHeaders(headers: Headers): DeviceType`
+### `getDeviceTypeFromHeaders(headers: Headers): DeviceEnum`
 
 Gets user-agent from headers and returns the device type.
 
@@ -396,10 +394,10 @@ enum UserAgent {
 }
 ```
 
-### `BreakpointConfig`
+### `BreakpointConfigType`
 
 ```ts
-type BreakpointConfig = { mobile?: number; tablet?: number };
+type BreakpointConfigType = { mobile?: number; tablet?: number };
 ```
 
 ---

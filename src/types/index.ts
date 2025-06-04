@@ -1,7 +1,7 @@
-export enum DeviceType {
+export enum DeviceEnum {
   MOBILE = "mobile",
   TABLET = "tablet",
   DESKTOP = "desktop",
 }
 
-export type BreakpointConfig = { mobile?: number; tablet?: number };
+export type BreakpointConfigType = { mobile?: number; tablet?: number };
