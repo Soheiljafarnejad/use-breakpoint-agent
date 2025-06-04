@@ -17,7 +17,8 @@ Perfect for responsive designs, conditional rendering, and stable multi-device s
 
 - ✅ SSR-friendly with initial server value
 - 📱 Detects device type from screen width
-- ⚛️ Works with all React versions that support hooks
+- 🧬 Works with all React versions that support hooks
+- ⚛️ Works with Next.js, Vite, CRA, and any React project
 - 💡 Lightweight and easy to use
 
 ## 📦 Installation
