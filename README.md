@@ -384,10 +384,10 @@ useBreakpointAgent(serverDevice, { mobile: 600, tablet: 900 });
 
 ## 🧩 Types And Enums
 
-### `UserAgent`
+### `DeviceEnum`
 
 ```ts
-enum UserAgent {
+enum DeviceEnum {
   MOBILE = "mobile",
   TABLET = "tablet",
   DESKTOP = "desktop",
