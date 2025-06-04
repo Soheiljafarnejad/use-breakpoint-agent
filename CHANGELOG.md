@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/Soheiljafarnejad/use-breakpoint-agent/compare/v1.0.2...v1.0.3) (2025-06-04)
+
+
+### Bug Fixes
+
+* 🐛 Added default Input in getDeviceTypeFromString ([2af40f9](https://github.com/Soheiljafarnejad/use-breakpoint-agent/commit/2af40f991807a2175ba1f6357a859334a5e17929))
+
 ## [1.0.2](https://github.com/Soheiljafarnejad/use-breakpoint-agent/compare/v1.0.1...v1.0.2) (2025-06-04)
 
 
