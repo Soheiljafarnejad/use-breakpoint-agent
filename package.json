@@ -1,0 +1,67 @@
+{
+  "name": "use-breakpoint-agent",
+  "version": "0.0.0",
+  "description": "A React hook to detect device type based on screen width",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
+  "type": "module",
+  "exports": {
+    ".": {
+      "require": "./dist/cjs/index.js",
+      "import": "./dist/esm/index.js",
+      "types": "./dist/types/index.d.ts"
+    },
+    "./client": {
+      "require": "./dist/cjs/client.js",
+      "import": "./dist/esm/client.js",
+      "types": "./dist/types/client.d.ts"
+    },
+    "./server": {
+      "require": "./dist/cjs/server.js",
+      "import": "./dist/esm/server.js",
+      "types": "./dist/types/server.d.ts"
+    }
+  },
+  "scripts": {
+    "build:cjs": "tsc --project tsconfig.cjs.json && tsc-alias --resolve-full-paths --outDir dist/cjs",
+    "build:esm": "tsc --project tsconfig.esm.json && tsc-alias --resolve-full-paths --outDir dist/esm",
+    "build": "npm run build:cjs && npm run build:esm"
+  },
+  "peerDependencies": {
+    "react": "^17.0.0 || ^18.0.0 || ^19.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0 || ^19.0.0"
+  },
+  "dependencies": {
+    "ua-parser-js": "^2.0.3",
+    "use-sync-external-store": "^1.5.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.6",
+    "@types/use-sync-external-store": "^1.5.0",
+    "tsc-alias": "^1.8.16",
+    "typescript": "^5.8.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/soheiljafarnejad/use-breakpoint-agent"
+  },
+  "homepage": "https://github.com/soheiljafarnejad/use-breakpoint-agent",
+  "bugs": "https://github.com/soheiljafarnejad/use-breakpoint-agent/issues",
+  "author": "Soheil Jafarnejad",
+  "license": "MIT",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "react",
+    "hook",
+    "media-query",
+    "responsive",
+    "device-type",
+    "breakpoint",
+    "react-hook"
+  ]
+}
