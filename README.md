@@ -209,7 +209,7 @@ function App({ serverDevice }: { serverDevice: DeviceType }) {
     <>
       <h1>Vite + React SSR</h1>
 
-      <Suspense fallback={<p>Loading card component...</p>}>
+      <Suspense fallback={<p>Loading component...</p>}>
         <MyComponent serverDevice={serverDevice} />
       </Suspense>
     </>
@@ -229,7 +229,7 @@ function MyComponent({ serverDevice }: { serverDevice: DeviceType }) {
   return <div>You are using: {device}</div>;
 }
 
-export default Card;
+export default MyComponent;
 ```
 
 ### ⚙️ Using with Other React SSR Frameworks
