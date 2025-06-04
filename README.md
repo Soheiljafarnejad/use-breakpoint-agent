@@ -59,7 +59,7 @@ import MyComponent from "./MyComponent";
 
 export default async function Page() {
   const serverDevice = await getDeviceType();
-  return <MyComponent serverDevice={device} />;
+  return <MyComponent serverDevice={serverDevice} />;
 }
 ```
 
@@ -85,7 +85,7 @@ import { getDeviceTypeFromHeaders } from "use-breakpoint-agent/server";
 import { DeviceType } from "use-breakpoint-agent";
 import MyComponent from "../components/MyComponent";
 
-export async function getServerSideProps({ req }) {
+export async function getServerSideProps({ req }: { req: Request }) {
   const serverDevice = getDeviceTypeFromHeaders(req.headers);
   return { props: { serverDevice } };
 }
@@ -112,45 +112,113 @@ export default function MyComponent({ serverDevice }: { serverDevice: DeviceType
 
 ```tsx
 // server.js
-import express from "express";
 import fs from "node:fs/promises";
+import express from "express";
+import { Transform } from "node:stream";
 import { getDeviceTypeFromHeaders } from "use-breakpoint-agent/server";
-import { render } from "./dist/server/entry-server.js";
 
+// Constants
+const isProduction = process.env.NODE_ENV === "production";
+const port = process.env.PORT || 5173;
+const base = process.env.BASE || "/";
+const ABORT_DELAY = 10000;
+
+// Cached production assets
+const templateHtml = isProduction ? await fs.readFile("./dist/client/index.html", "utf-8") : "";
+
+// Create http server
 const app = express();
 
-app.use("*", async (req, res) => {
+// Add Vite or respective production middlewares
+/** @type {import('vite').ViteDevServer | undefined} */
+let vite;
+if (!isProduction) {
+  const { createServer } = await import("vite");
+  vite = await createServer({
+    server: { middlewareMode: true },
+    appType: "custom",
+    base,
+  });
+  app.use(vite.middlewares);
+} else {
+  const compression = (await import("compression")).default;
+  const sirv = (await import("sirv")).default;
+  app.use(compression());
+  app.use(base, sirv("./dist/client", { extensions: [] }));
+}
+
+// Serve HTML
+app.use("*all", async (req, res) => {
   try {
+    const url = req.originalUrl.replace(base, "");
+
+    /** @type {string} */
+    let template;
+    /** @type {import('./src/entry-server.ts').render} */
+    let render;
+    if (!isProduction) {
+      // Always read fresh template in development
+      template = await fs.readFile("./index.html", "utf-8");
+      template = await vite.transformIndexHtml(url, template);
+      render = (await vite.ssrLoadModule("/src/entry-server.tsx")).render;
+    } else {
+      template = templateHtml;
+      render = (await import("./dist/server/entry-server.js")).render;
+    }
+
+    let didError = false;
+
     const device = getDeviceTypeFromHeaders(req.headers);
 
-    const { pipe, abort } = render(req.originalUrl, {
+    const { pipe, abort } = render(url, {
       device, //👈 Added device to `render` options
-
+      onShellError() {
+        res.status(500);
+        res.set({ "Content-Type": "text/html" });
+        res.send("<h1>Something went wrong</h1>");
+      },
       onShellReady() {
-        res.status(200);
-        res.setHeader("Content-Type", "text/html");
+        res.status(didError ? 500 : 200);
+        res.set({ "Content-Type": "text/html" });
 
-        const template = await fs.readFile("index.html", "utf-8");
+        const transformStream = new Transform({
+          transform(chunk, encoding, callback) {
+            res.write(chunk, encoding);
+            callback();
+          },
+        });
+
         const [htmlStart, htmlEnd] = template.split(`<!--app-html-->`);
+
         res.write(htmlStart);
 
-        pipe(res);
-        pipe.on("end", () => {
+        transformStream.on("finish", () => {
           res.end(htmlEnd);
         });
+
+        pipe(transformStream);
       },
-      onError(err) {
-        console.error(err);
+      onError(error) {
+        didError = true;
+        console.error(error);
       },
     });
 
-    setTimeout(() => abort(), 10000);
+    setTimeout(() => {
+      abort();
+    }, ABORT_DELAY);
   } catch (e) {
-    res.status(500).end(e.message);
+    vite?.ssrFixStacktrace(e);
+    console.log(e.stack);
+    res.status(500).end(e.stack);
   }
 });
 
-app.listen(5173);
+// Start http server
+app.listen(port, () => {
+  console.log(`Server started at http://localhost:${port}`);
+});
+
 ```
 
 2. Create a Custom Server-Side Render Function to Inject Device Info:
@@ -162,7 +230,7 @@ import { type RenderToPipeableStreamOptions, renderToPipeableStream } from "reac
 import App from "./App";
 import { DeviceType } from "use-breakpoint-agent";
 
-export function render(_url: string, options?: RenderToPipeableStreamOptions & { device: DeviceType }) {
+export function render(_url: string, options?: RenderToPipeableStreamOptions & { device?: DeviceType }) {
   const serverDevice = options?.device!;
   if (options) delete options.device;
 
