@@ -13,7 +13,6 @@ Perfect for responsive designs, conditional rendering, and stable multi-device s
 
 ![use-media-breakpoint](./assets/banner.webp)
 
-
 ## 📖 Related Article
 
 Read the full article on Medium:
@@ -305,7 +304,7 @@ function MyComponent({ serverDevice }: { serverDevice: DeviceEnum }) {
 export default MyComponent;
 ```
 
-### ⚙️ Using with Other React SSR Frameworks
+### ⚓ Using with Other React SSR Frameworks
 
 This example shows how you can adapt the device detection and server-side rendering logic to any React SSR environment. As long as your framework supports React server rendering and provides access to request headers, you can implement a similar pattern by:
 
