@@ -351,8 +351,6 @@ export async function handleRequest(req, res) {
 
 💡 **Note:** You can adjust this template to fit your SSR framework’s conventions and lifecycle. Just make sure to **hydrate the app on the client and detect the device from the user agent** (as shown in example ⚡ In Vite + React SSR — step 3).
 
----
-
 ## ⚙️ API
 
 ### `useBreakpointAgent(serverDevice, breakpoints)`
