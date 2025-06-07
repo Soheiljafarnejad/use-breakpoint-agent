@@ -349,7 +349,7 @@ export async function handleRequest(req, res) {
 }
 ```
 
-💡 **Note:** You can adjust this template to fit your SSR framework’s conventions and lifecycle. Just make sure to **hydrate the app on the client and detect the device from the user agent** (as shown in example ⚡ In Vite + React SSR — step 3).
+🚧 **Note:** You can adjust this template to fit your SSR framework’s conventions and lifecycle. Just make sure to **hydrate the app on the client and detect the device from the user agent** (as shown in example In Vite + React SSR — step 3).
 
 ## ⚙️ API
 
@@ -366,11 +366,11 @@ Returns the current device type (`mobile` | `tablet` | `desktop`).
 
 Determines device from user-agent string.
 
+💡**Note**: If the input is `undefined`, we will determine the device type using `navigator.userAgent`.
+
 ### `getDeviceTypeFromHeaders(headers: Headers): DeviceEnum`
 
 Gets user-agent from headers and returns the device type.
-
-**Note:** If the input is `undefined` or the device type cannot be determined, it will default to `desktop`.
 
 ## 📐 Breakpoints
 
