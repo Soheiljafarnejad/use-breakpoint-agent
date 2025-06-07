@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.4](https://github.com/Soheiljafarnejad/use-breakpoint-agent/compare/v1.0.3...v1.0.4) (2025-06-07)
+
+
+### Bug Fixes
+
+* Update README.md ([70d0dfb](https://github.com/Soheiljafarnejad/use-breakpoint-agent/commit/70d0dfb6e61a82375dbc72717d09486f4f455468))
+
 ## [1.0.3](https://github.com/Soheiljafarnejad/use-breakpoint-agent/compare/v1.0.2...v1.0.3) (2025-06-04)
 
 
