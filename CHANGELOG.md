@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.1.0](https://github.com/Soheiljafarnejad/use-breakpoint-agent/compare/v1.0.5...v1.1.0) (2025-06-10)
+
+
+### Features
+
+* ✨ add getBreakpointAgent utility for static device type detection ([9cc7fb3](https://github.com/Soheiljafarnejad/use-breakpoint-agent/commit/9cc7fb395e675e9695738677f15b7e33a193aeef))
+* ✨ add getBreakpointAgent utility for static device type detection ([d81016f](https://github.com/Soheiljafarnejad/use-breakpoint-agent/commit/d81016f3d30835f080e0c29b3b62727606d5d13c))
+
+
+### Bug Fixes
+
+* sync logic between getBreakpointAgent and useBreakpointAgent for consistent resize and first-load detection ([01506d9](https://github.com/Soheiljafarnejad/use-breakpoint-agent/commit/01506d9d93efdca3e58390ce1447f3f28a2a1155))
+
 ## [1.0.5](https://github.com/Soheiljafarnejad/use-breakpoint-agent/compare/v1.0.4...v1.0.5) (2025-06-10)
 
 
