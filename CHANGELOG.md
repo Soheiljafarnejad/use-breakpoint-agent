@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/Soheiljafarnejad/use-breakpoint-agent/compare/v1.1.0...v1.1.1) (2025-06-10)
+
+
+### Bug Fixes
+
+* 🐛 resolve incorrect device detection on resize in useBreakpointAgent ([e21f94e](https://github.com/Soheiljafarnejad/use-breakpoint-agent/commit/e21f94ece585a111e7762cbe07b1333bead37443))
+
 ## [1.1.0](https://github.com/Soheiljafarnejad/use-breakpoint-agent/compare/v1.0.5...v1.1.0) (2025-06-10)
 
 
