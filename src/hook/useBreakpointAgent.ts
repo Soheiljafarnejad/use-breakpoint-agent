@@ -1,17 +1,8 @@
 import { useCallback, useMemo, useRef } from "react";
-import { UAParser } from "ua-parser-js";
-import { BreakpointConfigType, DeviceEnum } from "../types";
+import { type BreakpointConfigType, DeviceEnum, type WindowWithBreakpointAgentType } from "../types";
 import { useSyncExternalStore } from "use-sync-external-store/shim";
-
-function getDeviceTypeFromString(input: string | undefined): DeviceEnum {
-  const data = UAParser(input);
-  const device = data.device?.type;
-  if (device === "mobile") return DeviceEnum.MOBILE;
-  if (device === "tablet") return DeviceEnum.TABLET;
-  else return DeviceEnum.DESKTOP;
-}
-
-const defaultBreakpoints: Required<BreakpointConfigType> = { mobile: 768, tablet: 1024 };
+import { getDeviceTypeFromString } from "../client";
+import { defaultBreakpoints } from "../lib/default";
 
 export const useBreakpointAgent = <T extends DeviceEnum | undefined>(
   initialServer: T = undefined as T,
@@ -29,7 +20,11 @@ export const useBreakpointAgent = <T extends DeviceEnum | undefined>(
   const getSnapshot = useCallback((): DeviceEnum => {
     if (!firstWidth.current) firstWidth.current = window.innerWidth;
     if (!resize.current) {
-      if (firstWidth.current !== window.innerWidth) resize.current = true;
+      if (firstWidth.current !== window.innerWidth) {
+        resize.current = true;
+        const w = window as WindowWithBreakpointAgentType;
+        w.__breakpointAgent = { firstWidth: firstWidth.current, resize: true };
+      }
       return getDeviceTypeFromString(navigator.userAgent);
     }
     const width = window.innerWidth;

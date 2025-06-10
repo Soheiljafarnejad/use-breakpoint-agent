@@ -5,3 +5,7 @@ export enum DeviceEnum {
 }
 
 export type BreakpointConfigType = { mobile?: number; tablet?: number };
+
+export type WindowWithBreakpointAgentType = Window & {
+  __breakpointAgent?: { firstWidth: number; resize: boolean };
+};

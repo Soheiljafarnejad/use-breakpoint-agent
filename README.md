@@ -38,7 +38,7 @@ pnpm add use-breakpoint-agent
 
 ## 🌱 Usage CSR
 
-1. Use the `useBreakpointAgent` hook in your component to get the current device type:
+Use the `useBreakpointAgent` hook in your component to get the current device type:
 
 ```ts
 import { useBreakpointAgent, DeviceEnum } from "use-breakpoint-agent";
@@ -48,6 +48,8 @@ function App() {
   return <p>You are using: {device}</p>;
 }
 ```
+
+💡 **Note:** Since this function never runs on the server side, to fix TypeScript issues you can use `useBreakpointAgent()!` or `useBreakpointAgent(DeviceEnum.DESKTOP)` instead.
 
 ## 🚀 Usage SSR
 
@@ -364,9 +366,24 @@ export async function handleRequest(req, res) {
 
 🚧 **Note:** You can adjust this template to fit your SSR framework’s conventions and lifecycle. Just make sure to **hydrate the app on the client and detect the device from the user agent** (as shown in example In Vite + React SSR — step 3).
 
+## 📘 `getBreakpointAgent`
+
+A lightweight, SSR-safe utility function to determine the current device type based on the **window size** and the **user agent**.
+
+### ✅ When to Use?
+
+Use this function when you **don't need a reactive hook**, but instead want a **one-time check** of the current device type. It's ideal for:
+
+- initializing state in libraries like `Redux`, `Zustand`
+- Non-React environments or utility modules
+
+ℹ️ Note: The behavior and logic of `getBreakpointAgent` mirrors that of `useBreakpointAgent`, but it's designed for one-time evaluation outside of React’s lifecycle or in server-side environments.
+
 ## ⚙️ API
 
 ### `useBreakpointAgent(serverDevice, breakpoints)`
+
+### `getBreakpointAgent(serverDevice, breakpoints)`
 
 | Param          | Type                                    | Description                                                                                                                                |
 | -------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -381,7 +398,7 @@ Determines device from user-agent string.
 
 💡**Note**: If the input is `undefined`, we will determine the device type using `navigator.userAgent`.
 
-### `getDeviceTypeFromHeaders(headers: Headers): DeviceEnum`
+### `getDeviceTypeFromHeaders(headers: Headers | IncomingHttpHeaders): DeviceEnum`
 
 Gets user-agent from headers and returns the device type.
 
@@ -396,7 +413,11 @@ Gets user-agent from headers and returns the device type.
 You can override these defaults by passing a second argument:
 
 ```tsx
+// useBreakpointAgent
 useBreakpointAgent(serverDevice, { mobile: 600, tablet: 900 });
+
+// getBreakpointAgent
+getBreakpointAgent(serverDevice, { mobile: 600, tablet: 900 });
 ```
 
 ## 🧩 Types And Enums
