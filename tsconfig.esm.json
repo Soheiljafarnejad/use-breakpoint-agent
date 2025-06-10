@@ -4,7 +4,6 @@
     "module": "ESNext",
     "outDir": "dist/esm",
     "target": "es6",
-    "declarationDir": "dist/types",
-    "declaration": true
+    "declaration": false
   }
 }

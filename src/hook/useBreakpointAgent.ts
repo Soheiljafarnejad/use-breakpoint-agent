@@ -13,7 +13,7 @@ function getDeviceTypeFromString(input: string | undefined): DeviceEnum {
 
 const defaultBreakpoints: Required<BreakpointConfigType> = { mobile: 768, tablet: 1024 };
 
-const useBreakpointAgent = <T extends DeviceEnum | undefined>(
+export const useBreakpointAgent = <T extends DeviceEnum | undefined>(
   initialServer: T = undefined as T,
   breakpoints?: BreakpointConfigType
 ): T extends undefined ? DeviceEnum | null : DeviceEnum => {
@@ -42,5 +42,3 @@ const useBreakpointAgent = <T extends DeviceEnum | undefined>(
 
   return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot) as any;
 };
-
-export default useBreakpointAgent;

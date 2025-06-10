@@ -36,7 +36,20 @@ yarn add use-breakpoint-agent
 pnpm add use-breakpoint-agent
 ```
 
-## 🚀 Usage
+## 🌱 Usage CSR
+
+1. Use the `useBreakpointAgent` hook in your component to get the current device type:
+
+```ts
+import { useBreakpointAgent, DeviceEnum } from "use-breakpoint-agent";
+
+function App() {
+  const device = useBreakpointAgent();
+  return <p>You are using: {device}</p>;
+}
+```
+
+## 🚀 Usage SSR
 
 ### 🌐 In Next.js (App Router)
 
