@@ -19,14 +19,15 @@ export const useBreakpointAgent = <T extends DeviceEnum | undefined>(
 
   const getSnapshot = useCallback((): DeviceEnum => {
     if (!firstWidth.current) firstWidth.current = window.innerWidth;
-    if (!resize.current) {
-      if (firstWidth.current !== window.innerWidth) {
-        resize.current = true;
-        const w = window as WindowWithBreakpointAgentType;
-        w.__breakpointAgent = { firstWidth: firstWidth.current, resize: true };
-      }
-      return getDeviceTypeFromString(navigator.userAgent);
+
+    if (!resize.current && firstWidth.current !== window.innerWidth) {
+      resize.current = true;
+      const w = window as WindowWithBreakpointAgentType;
+      w.__breakpointAgent = { firstWidth: firstWidth.current, resize: true };
     }
+
+    if (!resize.current) return getDeviceTypeFromString(navigator.userAgent);
+
     const width = window.innerWidth;
     if (width <= mobile) return DeviceEnum.MOBILE;
     if (width < tablet) return DeviceEnum.TABLET;
