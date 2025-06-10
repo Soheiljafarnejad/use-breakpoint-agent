@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.5](https://github.com/Soheiljafarnejad/use-breakpoint-agent/compare/v1.0.4...v1.0.5) (2025-06-10)
+
+
+### Bug Fixes
+
+* 🏷️ Export useBreakpointAgent as named export and update types declaration for proper autocomplete support ([4f7a079](https://github.com/Soheiljafarnejad/use-breakpoint-agent/commit/4f7a079eedfbbce5f6514962b33b170ee135c22e))
+
 ## [1.0.4](https://github.com/Soheiljafarnejad/use-breakpoint-agent/compare/v1.0.3...v1.0.4) (2025-06-07)
 
 
