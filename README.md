@@ -368,21 +368,22 @@ export async function handleRequest(req, res) {
 
 ## 📘 `getBreakpointAgent`
 
-A lightweight, SSR-safe utility function to determine the current device type based on the **window size** or the **user agent**.
+A lightweight, SSR-safe utility function to determine the current device type based on the **window size** and the **user agent**.
 
 ### ✅ When to Use?
 
 Use this function when you **don't need a reactive hook**, but instead want a **one-time check** of the current device type. It's ideal for:
 
-- initializing state in libraries like `Redux`, `Zustand` or during SSR
-- Pre-hydration detection in client-side apps
+- initializing state in libraries like `Redux`, `Zustand`
 - Non-React environments or utility modules
 
 ℹ️ Note: The behavior and logic of `getBreakpointAgent` mirrors that of `useBreakpointAgent`, but it's designed for one-time evaluation outside of React’s lifecycle or in server-side environments.
 
 ## ⚙️ API
 
-### `useBreakpointAgent` or `getBreakpointAgent`
+### `useBreakpointAgent(serverDevice, breakpoints)`
+
+### `getBreakpointAgent(serverDevice, breakpoints)`
 
 | Param          | Type                                    | Description                                                                                                                                |
 | -------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -412,7 +413,11 @@ Gets user-agent from headers and returns the device type.
 You can override these defaults by passing a second argument:
 
 ```tsx
+// useBreakpointAgent
 useBreakpointAgent(serverDevice, { mobile: 600, tablet: 900 });
+
+// getBreakpointAgent
+getBreakpointAgent(serverDevice, { mobile: 600, tablet: 900 });
 ```
 
 ## 🧩 Types And Enums
