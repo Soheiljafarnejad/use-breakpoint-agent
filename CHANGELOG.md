@@ -5,9 +5,10 @@
 
 ### Features
 
-* ✨ add getBreakpointAgent utility for static device type detection ([9cc7fb3](https://github.com/Soheiljafarnejad/use-breakpoint-agent/commit/9cc7fb395e675e9695738677f15b7e33a193aeef))
 * ✨ add getBreakpointAgent utility for static device type detection ([d81016f](https://github.com/Soheiljafarnejad/use-breakpoint-agent/commit/d81016f3d30835f080e0c29b3b62727606d5d13c))
-
+- Provides a non-reactive function to determine device type based on viewport width and userAgent
+- Useful for initializing state in Redux Toolkit, Zustand, or other static scenarios
+- Avoids use of hooks and event listeners for simple one-time device checks
 
 ### Bug Fixes
 
