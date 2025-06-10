@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.1.0](https://github.com/Soheiljafarnejad/use-breakpoint-agent/compare/v1.0.5...v1.1.0) (2025-06-10)
+
+
+### Features
+
+* ✨ add getBreakpointAgent utility for static device type detection ([d81016f](https://github.com/Soheiljafarnejad/use-breakpoint-agent/commit/d81016f3d30835f080e0c29b3b62727606d5d13c))
+- Provides a non-reactive function to determine device type based on viewport width and userAgent
+- Useful for initializing state in Redux Toolkit, Zustand, or other static scenarios
+- Avoids use of hooks and event listeners for simple one-time device checks
+
+### Bug Fixes
+
+* sync logic between getBreakpointAgent and useBreakpointAgent for consistent resize and first-load detection ([01506d9](https://github.com/Soheiljafarnejad/use-breakpoint-agent/commit/01506d9d93efdca3e58390ce1447f3f28a2a1155))
+
 ## [1.0.5](https://github.com/Soheiljafarnejad/use-breakpoint-agent/compare/v1.0.4...v1.0.5) (2025-06-10)
 
 
